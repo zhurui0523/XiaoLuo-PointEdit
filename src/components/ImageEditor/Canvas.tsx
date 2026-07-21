@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { Annotation, Point, ToolType } from '../../types/annotation';
 import { Image as ImageIcon, Sparkles, Upload } from 'lucide-react';
 
-interface CanvasProps {
+export interface CanvasProps {
   imageSrc: string | null;
   annotations: Annotation[];
   onAddAnnotation: (ann: Annotation) => void;

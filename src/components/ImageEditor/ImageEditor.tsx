@@ -52,9 +52,23 @@ const STROKE_WIDTHS = [
   { label: '极粗', value: 12 },
 ];
 
-export const ImageEditor: React.FC = () => {
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string>('');
+export interface ImageEditorProps {
+  initialImageSrc?: string | null;
+  initialFileName?: string;
+  onSave?: (dataUrl: string, annotations: Annotation[]) => void;
+  onCancel?: () => void;
+  className?: string;
+}
+
+export const ImageEditor: React.FC<ImageEditorProps> = ({
+  initialImageSrc = null,
+  initialFileName = '',
+  onSave,
+  onCancel,
+  className = '',
+}) => {
+  const [imageSrc, setImageSrc] = useState<string | null>(initialImageSrc);
+  const [fileName, setFileName] = useState<string>(initialFileName);
 
   // Editor configuration state
   const [activeTool, setActiveTool] = useState<ToolType>('select');
@@ -153,6 +167,7 @@ export const ImageEditor: React.FC = () => {
       const dataUrl = await exportAnnotatedImage(imageSrc, history.present);
       const nameWithoutExt = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
       downloadDataUrl(dataUrl, `annotated_${nameWithoutExt}.png`);
+      onSave?.(dataUrl, history.present);
       setShowExportMenu(false);
     } catch (err) {
       console.error(err);

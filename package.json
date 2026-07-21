@@ -1,13 +1,28 @@
 {
-  "name": "react-example",
-  "private": true,
-  "version": "0.0.0",
+  "name": "xiaoluo-image-editor",
+  "private": false,
+  "version": "1.0.0",
   "type": "module",
+  "main": "./dist-lib/index.umd.js",
+  "module": "./dist-lib/index.es.js",
+  "types": "./dist-lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-lib/index.d.ts",
+      "import": "./dist-lib/index.es.js",
+      "require": "./dist-lib/index.umd.js"
+    },
+    "./style.css": "./dist-lib/style.css"
+  },
+  "files": [
+    "dist-lib"
+  ],
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
+    "build:lib": "vite build --config vite.config.lib.ts",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
+    "clean": "rm -rf dist dist-lib server.js",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
@@ -23,6 +38,7 @@
     "motion": "^12.23.24"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.0",
@@ -30,6 +46,6 @@
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.3",
-    "@types/express": "^4.17.21"
+    "vite-plugin-dts": "^5.0.3"
   }
 }
