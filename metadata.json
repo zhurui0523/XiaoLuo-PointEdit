@@ -1,0 +1,6 @@
+{
+  "name": "小逻-指哪打哪图片编辑器",
+  "description": "A high-fidelity image annotation and批注 tool supporting custom shapes, arrows, markers, brushes, text layers, and complete undo/redo capabilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
