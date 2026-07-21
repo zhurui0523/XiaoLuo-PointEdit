@@ -10,8 +10,7 @@
 
 请在项目的 `assets/` 目录下放置您的演示截图，并命名为 `editor_preview.png`。它将在此处完美显示：
 
-![小逻-指哪打哪图片编辑器](<img width="1746" height="1176" alt="image" src="https://github.com/user-attachments/assets/805b66e9-c25f-4296-ac61-698e29e3031d" />
-)
+![小逻-指哪打哪图片编辑器](./assets/editor_preview.png)
 
 ---
 

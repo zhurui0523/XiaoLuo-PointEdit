@@ -56,7 +56,6 @@ export const Canvas: React.FC<CanvasProps> = ({
   }, [imageSrc]);
   // Dimensions of the parent viewport
   const [viewportSize, setViewportSize] = useState({ width: 800, height: 600 });
-  const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   // Drawing state
   const [isDrawing, setIsDrawing] = useState(false);
@@ -143,27 +142,6 @@ export const Canvas: React.FC<CanvasProps> = ({
       x: xCanvas / scale,
       y: yCanvas / scale,
     };
-  };
-
-  // Drag and drop event handlers
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDraggingOver(true);
-  };
-
-  const handleDragLeave = () => {
-    setIsDraggingOver(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDraggingOver(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      if (file.type.startsWith('image/')) {
-        onUploadImage(file);
-      }
-    }
   };
 
   // Focus the text editor when editing starts
@@ -705,23 +683,7 @@ export const Canvas: React.FC<CanvasProps> = ({
     <div
       ref={containerRef}
       className="flex-1 h-full flex items-center justify-center pt-6 px-6 pb-28 bg-slate-100 overflow-auto relative"
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
     >
-      {/* File Upload Dropoverlay */}
-      {isDraggingOver && (
-        <div className="absolute inset-0 bg-indigo-600/5 backdrop-blur-sm border-2 border-dashed border-indigo-400 z-50 flex items-center justify-center pointer-events-none">
-          <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-xl flex flex-col items-center gap-3 text-slate-800 max-w-sm text-center">
-            <div className="w-12 h-12 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center animate-bounce">
-              <Upload size={24} />
-            </div>
-            <h3 className="font-semibold text-lg">拖放图片至此</h3>
-            <p className="text-slate-500 text-sm">松开鼠标即可立即载入并开始标注图片</p>
-          </div>
-        </div>
-      )}
-
       {imageSrc && naturalSize ? (
         <div
           className="relative shadow-lg border border-gray-200 rounded-xl select-none bg-white"
