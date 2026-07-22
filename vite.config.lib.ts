@@ -25,13 +25,15 @@ export default defineConfig({
       name: 'XiaoLuoImageEditor',
       formats: ['es', 'umd'],
       fileName: (format) => `index.${format}.js`,
+      cssFileName: 'style',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'lucide-react'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          'lucide-react': 'LucideReact',
         },
       },
     },

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { Annotation, Point, ToolType } from '../../types/annotation';
+import { Annotation, Point, TextAnnotation, ToolType } from '../../types/annotation';
 import { Image as ImageIcon, Sparkles, Upload } from 'lucide-react';
 
 export interface CanvasProps {
@@ -280,7 +280,7 @@ export const Canvas: React.FC<CanvasProps> = ({
 
     // If active tool is 'text', check if we clicked on an existing text annotation to edit it immediately
     if (activeTool === 'text') {
-      const hitText = annotations.find((ann) => {
+      const hitText = annotations.find((ann): ann is TextAnnotation => {
         if (ann.type !== 'text') return false;
         const lines = ann.text.split('\n');
         const longestLine = lines.reduce((max, line) => Math.max(max, line.length), 0);
@@ -1037,12 +1037,16 @@ export const Canvas: React.FC<CanvasProps> = ({
                 left: `${
                   (editingTextId === 'new_temp_text'
                     ? newTextPos?.x ?? 0
-                    : annotations.find((a) => a.id === editingTextId)?.x ?? 0) * scale
+                    : annotations.find(
+                      (a): a is TextAnnotation => a.id === editingTextId && a.type === 'text',
+                    )?.x ?? 0) * scale
                 }px`,
                 top: `${
                   (editingTextId === 'new_temp_text'
                     ? newTextPos?.y ?? 0
-                    : annotations.find((a) => a.id === editingTextId)?.y ?? 0) * scale
+                    : annotations.find(
+                      (a): a is TextAnnotation => a.id === editingTextId && a.type === 'text',
+                    )?.y ?? 0) * scale
                 }px`,
               }}
             >

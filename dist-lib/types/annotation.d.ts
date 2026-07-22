@@ -43,3 +43,23 @@ export interface TextAnnotation extends BaseAnnotation {
     fontSize: number;
 }
 export type Annotation = RectangleAnnotation | BrushAnnotation | ArrowAnnotation | MarkerAnnotation | TextAnnotation;
+export declare const IMAGE_ANNOTATION_LAYER_VERSION: 1;
+export type ImageAnnotationType = AnnotationType;
+export type ImageAnnotationTool = ToolType;
+export type AnnotationPoint = Point;
+export type BaseImageAnnotation = BaseAnnotation;
+export type RectangleImageAnnotation = RectangleAnnotation;
+export type BrushImageAnnotation = BrushAnnotation;
+export type ArrowImageAnnotation = ArrowAnnotation;
+export type MarkerImageAnnotation = MarkerAnnotation;
+export type TextImageAnnotation = TextAnnotation;
+export type ImageAnnotation = Annotation;
+export interface ImageAnnotationLayer {
+    version: typeof IMAGE_ANNOTATION_LAYER_VERSION;
+    width: number;
+    height: number;
+    annotations: ImageAnnotation[];
+}
+export declare function isImageAnnotation(value: unknown): value is ImageAnnotation;
+export declare function isImageAnnotationLayer(value: unknown): value is ImageAnnotationLayer;
+export declare function resizeImageAnnotationLayer(layer: ImageAnnotationLayer, width: number, height: number): ImageAnnotationLayer;
